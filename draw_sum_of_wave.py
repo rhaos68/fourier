@@ -7,46 +7,52 @@ def draw_sum_of_wave(a0, coeffi, w):
 
     y_a0 = a0 * np.ones(len(t))
 
-    sin_val = [ab[0] * np.sin(i*w*t) for ab,i in zip(coeffi,n)] #an*sin(nwt)
-    cos_val = [ab[1] * np.cos(i*w*t) for ab,i in zip(coeffi,n)] #bn*cos(nwt)
-    yn = [(a0 + s + c) for s,c in zip(sin_val,cos_val)]
+    cos_val = [ab[0] * np.cos(i*w*t) for ab,i in zip(coeffi,n)] #an*cos(nwt)
+    sin_val = [ab[1] * np.sin(i*w*t) for ab,i in zip(coeffi,n)] #bn*sin(nwt)
+    yn = [(a0 + c + s) for c,s in zip(cos_val,sin_val)]
 
     y_sum = yn[0]
     for y in yn[1:]:  y_sum += y
 
     plt.subplot(5,1,1)
     plt.plot(t, y_sum)
-    plt.title(r"$y(t)=a_0 + \sum _{n=0}^{\infty}{a_n \sin n\omega t + b_n \cos n\omega t}$")
+    plt.title(r"$y(t)=a_0 + \sum _{n=0}^{\infty}{a_n \cos n\omega t + b_n \sin n\omega t}$")
 
     plt.subplot(5,1, 2)
     plt.plot(t, y_a0)
     plt.title("$y(t)=a_0$")
 
     plt.subplot(5, 2, 5)
-    plt.plot(t, sin_val[0])
-    plt.title(r"$y(t)=a_1 \sin \omega t$")
+    plt.plot(t, cos_val[0])
+    plt.plot(t,np.zeros(len(t)))
+    plt.title(r"$y(t)=a_1 \cos \omega t$")
 
     plt.subplot(5, 2, 6)
-    plt.plot(t, cos_val[0])
-    plt.title(r"$y(t)=b_1 \cos \omega t$")
+    plt.plot(t, sin_val[0])
+    plt.plot(t, np.zeros(len(t)))
+    plt.title(r"$y(t)=b_1 \sin \omega t$")
 
     plt.subplot(5, 2, 7)
-    plt.plot(t, sin_val[1])
-    plt.title(r"$y(t)=a_2 \sin \omega t$")
+    plt.plot(t, cos_val[1])
+    plt.plot(t, np.zeros(len(t)))
+    plt.title(r"$y(t)=a_2 \cos \omega t$")
 
     plt.subplot(5, 2, 8)
-    plt.plot(t, cos_val[1])
-    plt.title(r"$y(t)=b_2 \cos \omega t$")
+    plt.plot(t, sin_val[1])
+    plt.plot(t, np.zeros(len(t)))
+    plt.title(r"$y(t)=b_2 \sin \omega t$")
 
     plt.subplot(5, 2, 9)
-    plt.plot(t, sin_val[2])
-    plt.title(r"$y(t)=a_3 \sin \omega t$")
+    plt.plot(t, cos_val[2])
+    plt.plot(t, np.zeros(len(t)))
+    plt.title(r"$y(t)=a_3 \cos \omega t$")
 
     plt.subplot(5, 2, 10)
-    plt.plot(t, cos_val[2])
-    plt.title(r"$y(t)=b_3 \cos \omega t$")
+    plt.plot(t, sin_val[2])
+    plt.plot(t, np.zeros(len(t)))
+    plt.title(r"$y(t)=b_3 \sin \omega t$")
 
-    # plt.tight_layout()
+    plt.tight_layout()
     plt.show()
 
 a0 = 0.4
